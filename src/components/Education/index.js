@@ -77,7 +77,7 @@ const TimelineSection = styled.div`
 
 
 
-const index = () => {
+const  index = () => {
     return (
         <Container id="education">
             <Wrapper>
