@@ -1,61 +1,58 @@
-import React from 'react'
-import styled from 'styled-components'
-import { useRef } from 'react';
-import emailjs from '@emailjs/browser';
-import { Snackbar } from '@mui/material';
-import index from '../Education';
+import React from "react";
+import styled from "styled-components";
+import { useRef, useState } from "react";
+import emailjs from "@emailjs/browser";
+import { Snackbar } from "@mui/material";
 
 const Container = styled.div`
-
-display: flex;
-flex-direction: column;
-justify-content: center;
-position: relative;
-z-index: 1;
-align-items: center;
-@media (max-width: 960px) {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+  align-items: center;
+  @media (max-width: 960px) {
     padding: 0px;
-}
-`
+  }
+`;
 
 const Wrapper = styled.div`
-position: relative;
-display: flex;
-justify-content: space-between;
-align-items: center;
-flex-direction: column;
-width: 100%;
-max-width: 1350px;
-padding: 0px 0px 80px 0px;
-gap: 12px;
-@media (max-width: 960px) {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1350px;
+  padding: 0px 0px 80px 0px;
+  gap: 12px;
+  @media (max-width: 960px) {
     flex-direction: column;
-}
-`
+  }
+`;
 
 const Title = styled.div`
-font-size: 42px;
-text-align: center;
-font-weight: 600;
-margin-top: 20px;
+  font-size: 42px;
+  text-align: center;
+  font-weight: 600;
+  margin-top: 20px;
   color: ${({ theme }) => theme.text_primary};
   @media (max-width: 768px) {
-      margin-top: 12px;
-      font-size: 32px;
+    margin-top: 12px;
+    font-size: 32px;
   }
 `;
 
 const Desc = styled.div`
-    font-size: 18px;
-    text-align: center;
-    max-width: 600px;
-    color: ${({ theme }) => theme.text_secondary};
-    @media (max-width: 768px) {
-        margin-top: 12px;
-        font-size: 16px;
-    }
+  font-size: 18px;
+  text-align: center;
+  max-width: 600px;
+  color: ${({ theme }) => theme.text_secondary};
+  @media (max-width: 768px) {
+    margin-top: 12px;
+    font-size: 16px;
+  }
 `;
-
 
 const ContactForm = styled.form`
   width: 95%;
@@ -68,104 +65,284 @@ const ContactForm = styled.form`
   box-shadow: rgba(23, 92, 230, 0.15) 0px 4px 24px;
   margin-top: 28px;
   gap: 12px;
-`
+`;
 
 const ContactTitle = styled.div`
   font-size: 24px;
   margin-bottom: 6px;
   font-weight: 600;
   color: ${({ theme }) => theme.text_primary};
-`
+`;
+
+const InputGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+`;
+
+const Label = styled.label`
+  font-size: 16px;
+  font-weight: 500;
+  color: ${({ theme }) => theme.text_primary};
+  margin-bottom: 4px;
+`;
+
+const Required = styled.span`
+  color: #ff4444;
+  margin-left: 2px;
+`;
 
 const ContactInput = styled.input`
   flex: 1;
   background-color: transparent;
-  border: 1px solid ${({ theme }) => theme.text_secondary};
+  border: 1px solid
+    ${({ theme, error }) => (error ? "#ff4444" : theme.text_secondary)};
   outline: none;
   font-size: 18px;
   color: ${({ theme }) => theme.text_primary};
   border-radius: 12px;
-  padding: 12px 16px;
+  padding: 9px 13px;
   &:focus {
-    border: 1px solid ${({ theme }) => theme.primary};
+    border: 1px solid
+      ${({ theme, error }) => (error ? "#ff4444" : theme.primary)};
   }
-`
+`;
 
 const ContactInputMessage = styled.textarea`
   flex: 1;
   background-color: transparent;
-  border: 1px solid ${({ theme }) => theme.text_secondary};
+  border: 1px solid
+    ${({ theme, error }) => (error ? "#ff4444" : theme.text_secondary)};
   outline: none;
   font-size: 18px;
   color: ${({ theme }) => theme.text_primary};
   border-radius: 12px;
-  padding: 12px 16px;
+  padding: 9px 13px;
+  resize: vertical;
   &:focus {
-    border: 1px solid ${({ theme }) => theme.primary};
+    border: 1px solid
+      ${({ theme, error }) => (error ? "#ff4444" : theme.primary)};
   }
-`
+`;
+
+const ErrorMessage = styled.div`
+  color: #ff4444;
+  font-size: 14px;
+  margin-top: 4px;
+`;
 
 const ContactButton = styled.input`
   width: 100%;
   text-decoration: none;
   text-align: center;
   background: hsla(271, 100%, 50%, 1);
-  background: linear-gradient(225deg, hsla(271, 100%, 50%, 1) 0%, hsla(294, 100%, 50%, 1) 100%);
-  background: -moz-linear-gradient(225deg, hsla(271, 100%, 50%, 1) 0%, hsla(294, 100%, 50%, 1) 100%);
-  background: -webkit-linear-gradient(225deg, hsla(271, 100%, 50%, 1) 0%, hsla(294, 100%, 50%, 1) 100%);
-  padding: 13px 16px;
+  background: linear-gradient(
+    225deg,
+    hsla(271, 100%, 50%, 1) 0%,
+    hsla(294, 100%, 50%, 1) 100%
+  );
+  background: -moz-linear-gradient(
+    225deg,
+    hsla(271, 100%, 50%, 1) 0%,
+    hsla(294, 100%, 50%, 1) 100%
+  );
+  background: -webkit-linear-gradient(
+    225deg,
+    hsla(271, 100%, 50%, 1) 0%,
+    hsla(294, 100%, 50%, 1) 100%
+  );
+  padding: 10px 13px;
   margin-top: 2px;
   border-radius: 12px;
   border: none;
   color: ${({ theme }) => theme.text_primary};
   font-size: 18px;
   font-weight: 600;
-`
-
-
+  cursor: pointer;
+  &:hover {
+    opacity: 0.9;
+  }
+`;
 
 const Contact = () => {
-
-  //hooks
-  const [open, setOpen] = React.useState(false);
+  // hooks
+  const [open, setOpen] = useState(false);
+  const [errors, setErrors] = useState({});
+  const [formData, setFormData] = useState({
+    from_email: "",
+    from_name: "",
+    subject: "",
+    message: "",
+  });
   const form = useRef();
+
+  // Email validation regex
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  // Handle input changes
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+
+    // Clear error when user starts typing
+    if (errors[name]) {
+      setErrors((prev) => ({
+        ...prev,
+        [name]: "",
+      }));
+    }
+  };
+
+  // Validate form
+  const validateForm = () => {
+    const newErrors = {};
+
+    // Check if email is provided and valid
+    if (!formData.from_email.trim()) {
+      newErrors.from_email = "Email is required";
+    } else if (!validateEmail(formData.from_email)) {
+      newErrors.from_email = "Please enter a valid email address";
+    }
+
+    // Check other required fields
+    if (!formData.from_name.trim()) {
+      newErrors.from_name = "Name is required";
+    }
+
+    if (!formData.subject.trim()) {
+      newErrors.subject = "Subject is required";
+    }
+
+    if (!formData.message.trim()) {
+      newErrors.message = "Message is required";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    emailjs.sendForm('service_lq7g10n', 'template_e5gurdq', form.current, 'bP7kfQ_Z8vATrRHoL')
-      .then((result) => {
-        setOpen(true);
-        form.current.reset();
-      }, (error) => {
-        console.log(error.text);
-      });
-  }
 
-
+    if (validateForm()) {
+      // If validation passes, submit the form
+      emailjs
+        .sendForm(
+          "service_lq7g10n",
+          "template_e5gurdq",
+          form.current,
+          "bP7kfQ_Z8vATrRHoL"
+        )
+        .then(
+          (result) => {
+            setOpen(true);
+            form.current.reset();
+            // Reset form data state
+            setFormData({
+              from_email: "",
+              from_name: "",
+              subject: "",
+              message: "",
+            });
+            setErrors({});
+          },
+          (error) => {
+            console.log(error.text);
+          }
+        );
+    }
+  };
 
   return (
-    <Container id ="contact">
+    <Container id="contact">
       <Wrapper>
         <Title>Contact</Title>
-        <Desc>Feel free to reach out to me for any questions or opportunities!</Desc>
+        <Desc>
+          Feel free to reach out to me for any questions or opportunities!
+        </Desc>
         <ContactForm ref={form} onSubmit={handleSubmit}>
           <ContactTitle>Email Me 🚀</ContactTitle>
-          <ContactInput placeholder="Your Email" name="from_email" />
-          <ContactInput placeholder="Your Name" name="from_name" />
-          <ContactInput placeholder="Subject" name="subject" />
-          <ContactInputMessage placeholder="Message" rows="4" name="message" />
-          <ContactButton type="submit" value="Send"/>
+
+          <InputGroup>
+            <Label>
+              Your Email <Required>*</Required>
+            </Label>
+            <ContactInput
+              placeholder="Your Email"
+              name="from_email"
+              value={formData.from_email}
+              onChange={handleInputChange}
+              error={errors.from_email}
+            />
+            {errors.from_email && (
+              <ErrorMessage>{errors.from_email}</ErrorMessage>
+            )}
+          </InputGroup>
+
+          <InputGroup>
+            <Label>
+              Your Name <Required>*</Required>
+            </Label>
+            <ContactInput
+              placeholder="Your Name"
+              name="from_name"
+              value={formData.from_name}
+              onChange={handleInputChange}
+              error={errors.from_name}
+            />
+            {errors.from_name && (
+              <ErrorMessage>{errors.from_name}</ErrorMessage>
+            )}
+          </InputGroup>
+
+          <InputGroup>
+            <Label>
+              Subject <Required>*</Required>
+            </Label>
+            <ContactInput
+              placeholder="Subject"
+              name="subject"
+              value={formData.subject}
+              onChange={handleInputChange}
+              error={errors.subject}
+            />
+            {errors.subject && <ErrorMessage>{errors.subject}</ErrorMessage>}
+          </InputGroup>
+
+          <InputGroup>
+            <Label>
+              Message <Required>*</Required>
+            </Label>
+            <ContactInputMessage
+              placeholder="Message"
+              rows="4"
+              name="message"
+              value={formData.message}
+              onChange={handleInputChange}
+              error={errors.message}
+            />
+            {errors.message && <ErrorMessage>{errors.message}</ErrorMessage>}
+          </InputGroup>
+
+          <ContactButton type="submit" value="Send" />
         </ContactForm>
+
         <Snackbar
           open={open}
           autoHideDuration={6000}
-          onClose={()=>setOpen(false)}
+          onClose={() => setOpen(false)}
           message="Email sent successfully!"
           severity="success"
         />
       </Wrapper>
     </Container>
-  )
-}
+  );
+};
 
-export default Contact
+export default Contact;
