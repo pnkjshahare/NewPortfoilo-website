@@ -1,3 +1,5 @@
+import RocketResumeImg from "../images/RocketResume.png";
+import BoardImg from "../images/BoardImage.jpeg";
 export const Bio = {
   name: "Pankaj Shahare ",
   roles: ["Software Engineer", "Full Stack Developer", "Programmer"],
@@ -7,7 +9,7 @@ export const Bio = {
   leetcode: "https://leetcode.com/u/shahare_pnkj/",
   gfg: "https://www.geeksforgeeks.org/user/pankajsa6tmk/",
   resume:
-    "https://drive.google.com/file/d/1GH9CK_yMlbaF0BLGkqpqhVKqrflD4oqE/view?usp=sharing ",
+    "https://drive.google.com/file/d/1Vp5exwL68k_fyns917lzsFmNpTivswmP/view ",
 
   linkedin: "https://www.linkedin.com/in/pankaj-shahare-140a89239/",
   twitter: "https://x.com/PankajShahare18",
@@ -202,7 +204,7 @@ export const education = [
   },
   {
     id: 1,
-    img: "https://indsarkarijob.com/wp-content/uploads/2024/05/mahalogo.png",
+    img: BoardImg,
     school: "Sudama Junior College Mohadi Bhandara, Maharastra",
     date: "Apr 2019 - Apr 2020",
     grade: "76.9%",
@@ -211,7 +213,7 @@ export const education = [
   },
   {
     id: 2,
-    img: "https://indsarkarijob.com/wp-content/uploads/2024/05/mahalogo.png",
+    img: BoardImg,
     school: "Sulochana Devi Paradhi Vidyalay Mohadi Bhandara, Mahrastra",
     date: "June 2017 - March 2018",
     grade: "91.2%",
@@ -221,18 +223,6 @@ export const education = [
 ];
 
 export const projects = [
-  // {
-  //   id: 11,
-  //   title: "Real Estate Marketplace",
-
-  //   description:
-  //     "A responsive real estate website where users can search for rental or for-sale flats, view prices, and explore detailed listings including available accessories and amenities. It offers a seamless platform to connect buyers, sellers, and renters.",
-  //   image: "https://aihubprojects.com/wp-content/uploads/2019/10/image-18.png",
-  //   tags: ["HTML", "CSS", "JS", "Expressjs", "mangoDB"],
-  //   category: "web app",
-  //   github: "https://github.com/pnkjshahare/RealEstate-marketPlace",
-  //   webapp: "",
-  // },
   {
     id: 9,
     title: "LiveCodeHub-Collaborative Code Editor",
@@ -289,7 +279,7 @@ export const projects = [
   {
     id: 8,
     title: "Apple Quality Classification",
-    date: "March 2023",
+    date: "June 2023",
     description:
       "Apple Quality Classification uses machine learning to evaluate the quality of apples based on features like color, texture, size, and defects, leveraging image processing and classification algorithms to ensure accurate grading for agricultural or retail purposes.",
     image:
@@ -305,5 +295,17 @@ export const projects = [
     category: "machine learning",
     github: "https://github.com/pnkjshahare/Apple-Quality-Classification",
     webapp: "https://github.com/pnkjshahare/Apple-Quality-Classification",
+  },
+  {
+    id: 11,
+    title: "ResumeRocket-Automated Bulk Email Sender ",
+
+    description:
+      "ResumeRocket is a Python tool that automates bulk email sending with personalized messages and resume attachments via Gmail SMTP—perfect for job seekers and recruiters to apply efficiently and professionally.",
+    image: RocketResumeImg,
+    tags: ["Python", "smtplib", "pandas", "openpyxl", "python-dotenv"],
+    category: "web app",
+    github: "https://github.com/pnkjshahare/ResumeRocket",
+    webapp: "",
   },
 ];
