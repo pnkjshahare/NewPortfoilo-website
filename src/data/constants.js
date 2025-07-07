@@ -1,5 +1,7 @@
 import RocketResumeImg from "../images/RocketResume.png";
 import BoardImg from "../images/BoardImage.jpeg";
+import holteImg from "../images/holtec-asia.png";
+import bluestockImg from "../images/bluestock.jpeg";
 export const Bio = {
   name: "Pankaj Shahare ",
   roles: ["Software Engineer", "Full Stack Developer", "Programmer"],
@@ -163,11 +165,11 @@ export const skills = [
 export const experiences = [
   {
     id: 0,
-    img: "https://media.licdn.com/dms/image/D560BAQH5YHtpxAHvDA/company-logo_200_200/0/1694512590827/numetry_technologies_logo?e=1714608000&v=beta&t=oNrYDy6pg4YFAyNwiCOYZ1-E0DsVJjL6xQjsKAy5v9s",
-    role: "",
-    company: "",
-    date: "",
-    desc: "Working on developing Web apps, Collaborating with the team to perform various Frontend Tasks, Engineering Tasks,POC Tasks",
+    img: bluestockImg,
+    role: "Software Developer Intern",
+    company: "Bluestock Fintech",
+    date: "May 2025 - Jun 2025",
+    desc: "Developed a full-stack IPO Management system with real-time data access, secure authentication, and dynamic features to enhance user experience and streamline IPO tracking for fintech clients.",
     skills: [
       "ReactJS",
       "NodeJs",
@@ -181,12 +183,20 @@ export const experiences = [
   },
   {
     id: 1,
-    img: "https://th.bing.com/th/id/OIP._d8Yk6qvzumYJAzyiZV8DQAAAA?w=175&h=176&c=7&r=0&o=5&dpr=1.3&pid=1.7",
-    role: "Front End Intern ",
-    company: "Raise Digital",
-    date: "Mar 2022 - May 2022",
-    desc: "The aim was to design various component of Job Portal Website which will send automatic mails to the selected for and in interview based on resume score and the performance in the interview.",
-    skills: ["HTML", "CSS", "JavaScript", "Django", "Material UI"],
+    img: holteImg,
+    role: "Software Engineer Intern",
+    company: "Holtec Asia",
+    date: "Jun 2025 - present",
+    desc: "Working on developing Web apps, Collaborating with the team to perform various Backend & Frontend Tasks, Engineering Tasks & Debug the code ",
+    skills: [
+      "C#",
+      ".NET Framework",
+      "ASP.NET MVC",
+      "Entity Framework",
+      "Blazor",
+      "Microsoft SQL Server",
+      "Javascript",
+    ],
     doc: "",
   },
 ];
