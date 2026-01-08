@@ -2,6 +2,8 @@ import RocketResumeImg from "../images/RocketResume.png";
 import BoardImg from "../images/BoardImage.jpeg";
 import holteImg from "../images/holtec-asia.png";
 import bluestockImg from "../images/bluestock.jpeg";
+import connecticusImg from "../images/ConnecticusTech.jpg";
+import FyersImg from "../images/Fyers.jpg";
 export const Bio = {
   name: "Pankaj Shahare ",
   roles: ["Software Engineer", "Full Stack Developer", "Programmer"],
@@ -165,6 +167,66 @@ export const skills = [
 export const experiences = [
   {
     id: 0,
+    img: FyersImg,
+    role: "Software Engineer 1",
+    company: "FYERS Securities Private Limited ",
+    date: "Jan 2026 - Present",
+    // desc: "Built an AI-powered code review platform using Java, Spring Boot, React, and MySQL that automates PR reviews across 35+ repositories, integrates PRD/JIRA-based rules, SonarQube and Snyk scanning, automated GitHub comments, and AI-driven test generation—reducing vulnerabilities by 70%, manual review effort by 75%, and increasing code coverage by 38%. ",
+    // skills: [
+    //   "Java",
+    //   "Spring Boot",
+    //   "React.js",
+    //   "MySQL",
+    //   "REST APIs",
+    //   "GitHub API Integration",
+    //   "SonarQube",
+    //   "AI/LLM-based Code Analysis",
+    //   "Automated Code Review",
+    //   "JIRA Integration",
+    // ],
+    doc: "",
+  },
+  {
+    id: 1,
+    img: connecticusImg,
+    role: "Software Engineer Intern",
+    company: "Connecticus Technologies",
+    date: "Oct 2025 - Jan 2026",
+    desc: "Built an AI-powered code review platform using Java, Spring Boot, React, and MySQL that automates PR reviews across 35+ repositories, integrates PRD/JIRA-based rules, SonarQube and Snyk scanning, automated GitHub comments, and AI-driven test generation—reducing vulnerabilities by 70%, manual review effort by 75%, and increasing code coverage by 38%. ",
+    skills: [
+      "Java",
+      "Spring Boot",
+      "React.js",
+      "MySQL",
+      "REST APIs",
+      "GitHub API Integration",
+      "SonarQube",
+      "AI/LLM-based Code Analysis",
+      "Automated Code Review",
+      "JIRA Integration",
+    ],
+    doc: "",
+  },
+  {
+    id: 2,
+    img: holteImg,
+    role: "Software Engineer Intern",
+    company: "Holtec Asia",
+    date: "Jun 2025 - Oct 2025",
+    desc: "Working on developing Web apps, Collaborating with the team to perform various Backend & Frontend Tasks, Engineering Tasks & Debug the code ",
+    skills: [
+      "C#",
+      ".NET Framework",
+      "ASP.NET MVC",
+      "Entity Framework",
+      "Blazor",
+      "Microsoft SQL Server",
+      "Javascript",
+    ],
+    doc: "",
+  },
+  {
+    id: 3,
     img: bluestockImg,
     role: "Software Developer Intern",
     company: "Bluestock Fintech",
@@ -180,24 +242,6 @@ export const experiences = [
       "CSS",
       "JavaScript",
     ],
-  },
-  {
-    id: 1,
-    img: holteImg,
-    role: "Software Engineer Intern",
-    company: "Holtec Asia",
-    date: "Jun 2025 - present",
-    desc: "Working on developing Web apps, Collaborating with the team to perform various Backend & Frontend Tasks, Engineering Tasks & Debug the code ",
-    skills: [
-      "C#",
-      ".NET Framework",
-      "ASP.NET MVC",
-      "Entity Framework",
-      "Blazor",
-      "Microsoft SQL Server",
-      "Javascript",
-    ],
-    doc: "",
   },
 ];
 
