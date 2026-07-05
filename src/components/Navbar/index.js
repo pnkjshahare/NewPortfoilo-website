@@ -3,73 +3,57 @@ import {
   Nav,
   NavLink,
   NavbarContainer,
-  Span,
   NavLogo,
+  LogoVideo,
   NavItems,
-  GitHubButton,
-  ButtonContainer,
   MobileIcon,
   MobileMenu,
-  MobileNavLogo,
   MobileLink,
+  ThemeToggleButton,
+  NavActions,
 } from "./NavbarStyledComponent";
-import { DiCssdeck } from "react-icons/di";
 import { FaBars } from "react-icons/fa";
-import { Bio } from "../../data/constants";
-import { Close, CloseRounded } from "@mui/icons-material";
-import { useTheme } from "styled-components";
+import { FiSun, FiMoon } from "react-icons/fi";
+import BullBlue from "../../images/BullBlue.mp4";
+import BullRed from "../../images/BullRed.mp4";
+import { useThemeMode } from "../../utils/ThemeContext.js";
+import { useMarketTrend } from "../../utils/MarketContext.js";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = React.useState(false);
-  const theme = useTheme();
+  const { mode, toggleMode } = useThemeMode();
+  const { trend } = useMarketTrend();
+  const bullClip = trend === "down" ? BullRed : BullBlue;
   return (
     <Nav>
       <NavbarContainer>
-        <NavLogo to="/">
-          <a
-            style={{
-              display: "flex",
-              alignItems: "center",
-              color: "white",
-              marginBottom: "20;",
-              cursor: "pointer",
-            }}
-          >
-            <DiCssdeck size="3rem" /> <Span>Portfolio</Span>
-          </a>
+        <NavLogo to="/" aria-label="Portfolio home">
+          <LogoVideo key={bullClip} src={bullClip} autoPlay loop muted playsInline $trend={trend} />
         </NavLogo>
-        <MobileIcon>
-          <FaBars
-            onClick={() => {
-              setIsOpen(!isOpen);
-            }}
-          />
-        </MobileIcon>
         <NavItems>
           <NavLink href="#about">About</NavLink>
-          <NavLink href="#skills">Skills</NavLink>
           <NavLink href="#experience">Experience</NavLink>
+          <NavLink href="#skills">Skills</NavLink>
           <NavLink href="#projects">Projects</NavLink>
           <NavLink href="#education">Education</NavLink>
           <NavLink href="#contact">Contact</NavLink>
         </NavItems>
-        <div className="prof">
-          <ButtonContainer>
-            <GitHubButton href={Bio.github} target="_blank">
-              Github
-            </GitHubButton>
-          </ButtonContainer>
-          <ButtonContainer>
-            <GitHubButton href={Bio.leetcode} target="_blank">
-              LeetCode
-            </GitHubButton>
-          </ButtonContainer>
-          <ButtonContainer>
-            <GitHubButton href={Bio.gfg} target="_blank">
-              GFG
-            </GitHubButton>
-          </ButtonContainer>
-        </div>
+        <NavActions>
+          <ThemeToggleButton
+            onClick={toggleMode}
+            aria-label={mode === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+            title={mode === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+          >
+            {mode === "dark" ? <FiSun /> : <FiMoon />}
+          </ThemeToggleButton>
+          <MobileIcon>
+            <FaBars
+              onClick={() => {
+                setIsOpen(!isOpen);
+              }}
+            />
+          </MobileIcon>
+        </NavActions>
         {isOpen && (
           <MobileMenu isOpen={isOpen}>
             <MobileLink
@@ -81,6 +65,15 @@ const Navbar = () => {
               About
             </MobileLink>
             <MobileLink
+              href="#experience"
+              onClick={() => {
+                setIsOpen(!isOpen);
+              }}
+            >
+              Experience
+            </MobileLink>
+
+            <MobileLink
               href="#skills"
               onClick={() => {
                 setIsOpen(!isOpen);
@@ -88,7 +81,6 @@ const Navbar = () => {
             >
               Skills
             </MobileLink>
-
             <MobileLink
               href="#projects"
               onClick={() => {
@@ -113,19 +105,6 @@ const Navbar = () => {
             >
               Contact
             </MobileLink>
-
-            <GitHubButton
-              style={{
-                padding: "10px 16px",
-                background: `${theme.primary}`,
-                color: "white",
-                width: "max-content",
-              }}
-              href={Bio.github}
-              target="_blank"
-            >
-              Github Profile
-            </GitHubButton>
           </MobileMenu>
         )}
       </NavbarContainer>

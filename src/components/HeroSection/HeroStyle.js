@@ -1,21 +1,22 @@
 import styled from "styled-components";
-import _default from "../../themes/default";
 
 export const HeroContainer = styled.div`
-  background: ${({ theme }) => theme.card_light};
+  background: transparent;
   display: flex;
   justify-content: center;
   position: relative;
-  padding: 80px 30px;
+  width: 100%;
+  overflow: hidden;
+  padding: 80px clamp(16px, 4vw, 64px);
   @media (max-width: 960px) {
-    padding: 66px 16px;
+    padding: 66px 20px;
   }
-  @media (max-width: 640) {
+  @media (max-width: 640px) {
     padding: 32px 16px;
   }
   z-index: 1;
 
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 70% 95%, 0 100%);
+  clip-path: none;
 `;
 
 export const HeroBg = styled.div`
@@ -28,13 +29,15 @@ export const HeroBg = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  max-width: 1360px;
+  max-width: none;
   overflow: hidden;
   padding: 0 30px;
   top: 50%;
   left: 50%;
   -webkit-transform: translateX(-50%) translateY(-50%);
   transform: translateX(-50%) translateY(-50%);
+  z-index: 0;
+  pointer-events: none;
 
   @media (max-width: 960px) {
     justify-content: center;
@@ -48,7 +51,8 @@ export const HeroInnerContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 1100px;
+  max-width: 1440px;
+  z-index: 2;
 
   @media (max-width: 960px) {
     flex-direction: column;
@@ -95,13 +99,16 @@ export const HeroRightContainer = styled.div`
 export const Img = styled.img`
   position: relative;
   width: 100%;
-  height: 100%;
+  height: auto;
+  aspect-ratio: 1;
   max-width: 500px;
   max-height:500px;
+  object-fit: cover;
   
   border-radius: 50%;
 
-  border: 2px solid ${({ theme }) => theme.primary};
+  border: 4px solid ${({ theme, $trend }) => ($trend === "down" ? theme.danger : theme.success)};
+  transition: border-color 0.4s ease;
 
   @media (max-width: 768px) {
     max-width: 400px;
@@ -150,8 +157,9 @@ export const TextLoop = styled.div`
 `;
 
 export const Span = styled.span`
-  color: ${({ theme }) => theme.primary};
+  color: ${({ theme, $trend }) => ($trend === "down" ? theme.danger : theme.success)};
   cursor: pointer;
+  transition: color 0.4s ease;
 `;
 
 export const SubTitle = styled.div`
@@ -179,29 +187,22 @@ export const ResumeButton = styled.a`
     max-width: 300px;
     text-align: center;
     padding: 16px 0;
-    color:${({ theme }) => theme.white};
-    border-radius: 20px;
+    color: ${({ theme }) => theme.button_text};
+    border-radius: 999px;
     cursor: pointer;
-    font-size: 20px;
-    font-weight: 600;
-    transition: all 0.2s ease-in-out !important;
-    background: hsla(271, 100%, 50%, 1);
-    background: linear-gradient(225deg, hsla(271, 100%, 50%, 1) 0%, hsla(294, 100%, 50%, 1) 100%);
-    background: -moz-linear-gradient(225deg, hsla(271, 100%, 50%, 1) 0%, hsla(294, 100%, 50%, 1) 100%);
-    background: -webkit-linear-gradient(225deg, hsla(271, 100%, 50%, 1) 0%, hsla(294, 100%, 50%, 1) 100%);
-    box-shadow:  20px 20px 60px #1F2634,
-    -20px -20px 60px #1F2634;
+    font-size: 18px;
+    font-weight: 700;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.4s ease;
+    background: ${({ theme, $trend }) => ($trend === "down" ? theme.danger : theme.success)};
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
     &:hover {
-        transform: scale(1.05);
-    transition: all 0.4s ease-in-out;
-    box-shadow:  20px 20px 60px #1F2634,
-    filter: brightness(1);
-    }    
-    
-    
+        transform: scale(1.03);
+        box-shadow: 0 16px 34px rgba(0, 0, 0, 0.24);
+    }
+
     @media (max-width: 640px) {
         padding: 12px 0;
-        font-size: 18px;
-    } 
+        font-size: 16px;
+    }
 
 `;

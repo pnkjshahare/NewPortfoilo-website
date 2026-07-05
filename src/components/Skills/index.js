@@ -9,6 +9,8 @@ justify-content: center;
 position: relative;
 z-index: 1;
 align-items: center;
+width: 100%;
+padding: 0 clamp(16px, 4vw, 64px);
 `
 
 const Wrapper = styled.div`
@@ -18,7 +20,7 @@ justify-content: space-between;
 align-items: center;
 flex-direction: column;
 width: 100%;
-max-width: 1100px;
+max-width: 1440px;
 gap: 12px;
 @media (max-width: 960px) {
     flex-direction: column;
@@ -49,28 +51,30 @@ export const Desc = styled.div`
 
 const SkillsContainer = styled.div`
   width: 100%;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
   margin-top: 30px;
   gap: 30px;
-  justify-content: center;
 `
 
 const Skill = styled.div`
   width: 100%;
-  max-width: 500px;
+  border: 1px solid ${({ theme }) => theme.border};
   background: ${({ theme }) => theme.card};
-  border: 0.1px solid #854CE6;
-  box-shadow: rgba(23, 92, 230, 0.15) 0px 4px 24px;
-  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  border-radius: 18px;
   padding: 18px 36px;
+  transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+  &:hover {
+    transform: translateY(-6px);
+    border-color: ${({ theme }) => theme.primary};
+    background: ${({ theme }) => theme.card_hover};
+  }
   @media (max-width: 768px) {
-    max-width: 400px;
     padding: 10px 36px;
   }
   @media (max-width: 500px) {
-    max-width: 330px;
-    padding: 10px 36px;
+    padding: 12px 16px;
   }
 
 
@@ -94,9 +98,10 @@ const SkillList = styled.div`
 
 const SkillItem = styled.div`
   font-size: 16px;
-  font-weight: 400;
-  color: ${({ theme }) => theme.text_primary + 80};
-  border: 1px solid ${({ theme }) => theme.text_primary + 80};
+  font-weight: 500;
+  color: ${({ theme }) => theme.tag_text};
+  background-color: ${({ theme }) => theme.tag_bg};
+  border: 1px solid ${({ theme }) => theme.tag_border};
   border-radius: 12px;
   padding: 12px 16px;
   display: flex;
@@ -116,6 +121,7 @@ const SkillItem = styled.div`
 const SkillImage = styled.img`
   width: 24px;
   height: 24px;
+  object-fit: contain;
 `
 
 
@@ -128,11 +134,11 @@ const Skills = () => {
         </Desc>
         <SkillsContainer>
           {skills.map((skill) => (
-            <Skill>
+            <Skill key={skill.title}>
               <SkillTitle>{skill.title}</SkillTitle>
               <SkillList>
                 {skill.skills.map((item) => (
-                  <SkillItem>
+                  <SkillItem key={item.name}>
                     <SkillImage src={item.image}/>
                     {item.name}
                   </SkillItem>

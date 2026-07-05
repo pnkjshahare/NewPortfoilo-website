@@ -1,13 +1,7 @@
 
 import React from 'react'
 import styled from 'styled-components'
-import Timeline from '@mui/lab/Timeline';
-import TimelineItem from '@mui/lab/TimelineItem';
-import TimelineSeparator from '@mui/lab/TimelineSeparator';
-import TimelineConnector from '@mui/lab/TimelineConnector';
-import TimelineContent from '@mui/lab/TimelineContent';
-import TimelineDot from '@mui/lab/TimelineDot';
-import { education, experiences } from '../../data/constants';
+import { education } from '../../data/constants';
 import EducationCard from '../Cards/EducationCard';
 
 const Container = styled.div`
@@ -18,6 +12,7 @@ const Container = styled.div`
     z-index: 1;
     align-items: center;
     padding: 0px 0px 60px 0px;
+    width: 100%;
     @media (max-width: 960px) {
         padding: 0px;
     }
@@ -30,8 +25,8 @@ const Wrapper = styled.div`
     align-items: center;
     flex-direction: column;
     width: 100%;
-    max-width: 1350px;
-    padding: 40px 0px 0px 0px;
+    max-width: 1440px;
+    padding: 40px clamp(16px, 4vw, 64px) 0px;
     gap: 12px;
     @media (max-width: 960px) {
         flex-direction: column;
@@ -61,18 +56,13 @@ const Desc = styled.div`
     }
 `;
 
-const TimelineSection = styled.div`
+const EducationGrid = styled.div`
     width: 100%;
-    max-width: 1000px;
-    margin-top: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    @media (max-width: 660px) {
-        align-items: end;
-    }
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+    gap: 24px;
+    align-items: start;
 `;
 
 
@@ -85,22 +75,11 @@ const  index = () => {
                 <Desc>
                     My education has been a journey of self-discovery and growth. My educational details are as follows.
                 </Desc>
-                <TimelineSection>
-                    <Timeline>
-                        {education.map((education,index) => (
-                            <TimelineItem >
-                                <TimelineContent sx={{ py: '12px', px: 2 }}>
-                                    <EducationCard education={education}/>
-                                </TimelineContent>
-                                <TimelineSeparator>
-                                    <TimelineDot variant="outlined" color="secondary" />
-                                    {index !== experiences.length  && <TimelineConnector style={{ background: '#854CE6' }} />}
-                                </TimelineSeparator>
-                            </TimelineItem>
-                        ))}
-                    </Timeline>
-
-                </TimelineSection>
+                <EducationGrid>
+                    {education.map((education) => (
+                        <EducationCard education={education} key={education.id} />
+                    ))}
+                </EducationGrid>
             </Wrapper>
         </Container>
     )

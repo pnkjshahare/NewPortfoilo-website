@@ -1,17 +1,22 @@
 import { Link as LinkR } from 'react-router-dom';
 import styled from 'styled-components';
-import _default from '../../themes/default';
 
 export const Nav = styled.div`
-    background-color: ${({theme}) => theme.card_light};
+    background-color: ${({theme}) => theme.bgLight};
+    border-bottom: 1px solid ${({ theme }) => theme.border};
+    width: 100%;
     height: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1rem;
-    position: sticky;
+    position: fixed;
     top: 0;
-    z-index: 10;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
     @media (max-width: 960px) {
         trastion: 0.8s all ease;
     }
@@ -23,12 +28,13 @@ export const NavbarContainer = styled.div`
   height: 60px;
   z-index: 1;
   width: 100%;
-  padding: 0 24px;
-  max-width: 1200px;
+  padding: 0 clamp(16px, 4vw, 64px);
+  max-width: none;
 `;
 
 export const NavLogo = styled(LinkR)`
-    width: 80%;    
+    flex: 1 1 120px;
+    min-width: 0;
     padding: 0 6px;
     display: flex;
     justify-content: start;
@@ -38,10 +44,21 @@ export const NavLogo = styled(LinkR)`
       padding: 0 0px;
   }
 `;
-export const Span = styled.div`
-    padding: 0 4px;
-    font-weight: bold;
-    font-size: 18px;
+
+export const LogoVideo = styled.video`
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid ${({ theme, $trend }) => ($trend === "down" ? theme.danger : theme.success)};
+    background: ${({ theme }) => theme.card};
+    display: block;
+    transition: border-color 0.4s ease;
+
+    @media (max-width: 640px) {
+      width: 55px;
+      height: 55px;
+    }
 `;
 export const NavItems = styled.ul`
     width: 100%;
@@ -97,7 +114,7 @@ export const GitHubButton = styled.a`
 `;
 
 export const ButtonContainer = styled.div`
-  width: 80%;  
+  flex: 1 1 180px;
   height: 100%;
   display: flex;
   justify-content: end;
@@ -112,15 +129,19 @@ export const ButtonContainer = styled.div`
 export const MobileIcon = styled.div`
   display: none;
   @media screen and (max-width: 768px) {
-    display: block;
-    position: absolute;
-    top: 0;
-    right: 0;
-    transform: translate(-100%, 60%);
+    display: flex;
+    align-items: center;
     font-size: 1.5rem;
     cursor: pointer;
     color: ${({ theme }) => theme.text_primary};
   }
+`
+
+export const NavActions = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: 0 0 auto;
 `
 
 export const MobileMenu = styled.div`
@@ -133,7 +154,8 @@ export const MobileMenu = styled.div`
     right: 0;
     width: 100%;
     padding: 12px 40px 24px 40px;
-    background: ${({ theme }) => theme.card_light+99};
+    background: ${({ theme }) => theme.bgLight};
+    border-bottom: 1px solid ${({ theme }) => theme.border};
     transition: all 0.6s ease-in-out;
     transform: ${({ isOpen }) => (isOpen ? 'translateY(0)' : 'translateY(-100%)')};
     border-radius: 0 0 20px 20px;
@@ -214,5 +236,30 @@ export const MobileNavLogo = styled(LinkR)`
   text-decoration: none;
   @media (max-width: 640px) {
     padding: 0 0px;
+  }
+`;
+
+export const ThemeToggleButton = styled.button`
+  width: 40px;
+  height: 40px;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  border: 1px solid ${({ theme }) => theme.border};
+  background: ${({ theme }) => theme.card};
+  color: ${({ theme }) => theme.primary};
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+  font-size: 18px;
+
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  &:hover {
+    transform: scale(1.06);
+    border-color: ${({ theme }) => theme.primary};
   }
 `;

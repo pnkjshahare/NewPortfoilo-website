@@ -34,9 +34,13 @@ text-overflow: ellipsis;
 `
 
 const Card = styled.div`
-    width: 650px;
-    border-radius: 10px;
-    box-shadow: rgba(23, 92, 230, 0.15) 0px 4px 24px;
+    width: 100%;
+    height: 260px;
+    min-width: 0;
+    border-radius: 18px;
+    border: 1px solid ${({ theme }) => theme.border};
+    background: ${({ theme }) => theme.card};
+    backdrop-filter: blur(10px);
     padding: 12px 16px;
     justify-content: space-between;
     position: relative;
@@ -44,15 +48,26 @@ const Card = styled.div`
     display: flex;
     flex-direction: column;
     gap: 12px;
-    transition: all 0.3s ease-in-out;
+    align-self: start;
+    transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
     &:hover{
-        box-shadow: 0px 0px 20px rgba(0,0,0,0.2);
+        height: auto;
+        min-height: 260px;
+        border-color: ${({ theme }) => theme.primary};
+        background: ${({ theme }) => theme.card_hover};
         transform: translateY(-5px);
     }
     @media only screen and (max-width: 768px){
+        height: 240px;
         padding: 10px;
         gap: 8px;
-        width: 300px;
+        width: 100%;
+    }
+
+    @media only screen and (max-width: 768px){
+        &:hover {
+            min-height: 240px;
+        }
     }
 
     &:hover ${Document}{
@@ -64,13 +79,13 @@ const Card = styled.div`
         -webkit-line-clamp: unset;
 
     }
-    border: 0.1px solid #854CE6;
 `
 
 const Top = styled.div`
     width: 100%;
     display: flex;
-    gap: 12px
+    gap: 12px;
+    min-width: 0;
 `
 
 const Image = styled.img`
@@ -85,6 +100,7 @@ const Image = styled.img`
 
 const Body = styled.div`
     width: 100%;
+    min-width: 0;
     display: flex;
     flex-direction: column; 
 `

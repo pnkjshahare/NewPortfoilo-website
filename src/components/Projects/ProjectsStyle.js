@@ -1,14 +1,16 @@
 import styled from 'styled-components';
-import _default from '../../themes/default';
 
 export const Container = styled.div`
-    background: linear-gradient(343.07deg, rgba(132, 59, 206, 0.06) 5.71%, rgba(132, 59, 206, 0) 64.83%);
+    background: transparent;
     display: flex;
     flex-direction: column;
     justify-content: center;
     position: relative;
     z-index: 1;
     align-items: center;
+    width: 100%;
+    margin-top: 40px;
+    padding: 0 clamp(16px, 4vw, 64px);
     clip-path: polygon(0 0, 100% 0, 100% 100%,100% 98%, 0 100%);
 `;
 
@@ -20,7 +22,7 @@ export const Wrapper = styled.div`
     align-items: center;
     flex-direction: column;
     width: 100%;
-    max-width: 1350px;
+    max-width: 1440px;
     padding: 10px 0px 100px 0;
     gap: 12px;
     @media (max-width: 960px) {
@@ -88,11 +90,12 @@ export const Divider = styled.div`
 
 
 export const CardContainer = styled.div`
-    display: flex;
-    justify-content: center;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
     align-items: center;
     gap: 28px;
-    flex-wrap: wrap;
+    justify-items: stretch;
     // display: grid;
     // grid-template-columns: repeat(3, 1fr);
     // grid-gap: 32px;

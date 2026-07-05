@@ -1,14 +1,10 @@
 
 import React from 'react'
+import { useState } from 'react'
 import styled from 'styled-components'
-import Timeline from '@mui/lab/Timeline';
-import TimelineItem from '@mui/lab/TimelineItem';
-import TimelineSeparator from '@mui/lab/TimelineSeparator';
-import TimelineConnector from '@mui/lab/TimelineConnector';
-import TimelineContent from '@mui/lab/TimelineContent';
-import TimelineDot from '@mui/lab/TimelineDot';
 import ExperienceCard from '../Cards/ExperienceCard';
 import { experiences } from '../../data/constants';
+import ExperienceDetails from '../ExperienceDetails';
 
 const Container = styled.div`
     display: flex;
@@ -18,6 +14,7 @@ const Container = styled.div`
     z-index: 1;
     align-items: center;
     padding: 40px 0px 80px 0px;
+    width: 100%;
     @media (max-width: 960px) {
         padding: 0px;
     }
@@ -30,8 +27,8 @@ const Wrapper = styled.div`
     align-items: center;
     flex-direction: column;
     width: 100%;
-    max-width: 1350px;
-    padding: 80px 0;
+    max-width: 1440px;
+    padding: 80px clamp(16px, 4vw, 64px);
     gap: 12px;
     @media (max-width: 960px) {
         flex-direction: column;
@@ -61,20 +58,22 @@ const Desc = styled.div`
     }
 `;
 
-const TimelineSection = styled.div`
+const ExperienceGrid = styled.div`
     width: 100%;
-    max-width: 1000px;
-    margin-top: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 24px;
+    align-items: start;
+    @media (max-width: 1200px) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+    }
 `;
-
-
-
-const index = () => {
+function Experience() {
+    const [openModal, setOpenModal] = useState({ state: false, experience: null });
     return (
         <Container id="experience">
             <Wrapper>
@@ -82,25 +81,21 @@ const index = () => {
                 <Desc>
                     My work experience as a software engineer and working on different companies and projects.
                 </Desc>
-                <TimelineSection>
-                    <Timeline>
-                        {experiences.map((experience,index) => (
-                            <TimelineItem>
-                                <TimelineSeparator>
-                                    <TimelineDot variant="outlined" color="secondary" />
-                                    {index !== experiences.length - 1 && <TimelineConnector style={{ background: '#854CE6' }} />}
-                                </TimelineSeparator>
-                                <TimelineContent sx={{ py: '12px', px: 2 }}>
-                                    <ExperienceCard experience={experience}/>
-                                </TimelineContent>
-                            </TimelineItem>
-                        ))}
-                    </Timeline>
-
-                </TimelineSection>
+                <ExperienceGrid>
+                    {experiences.map((experience) => (
+                        <ExperienceCard
+                            experience={experience}
+                            key={experience.id}
+                            onClick={(selectedExperience) => setOpenModal({ state: true, experience: selectedExperience })}
+                        />
+                    ))}
+                </ExperienceGrid>
             </Wrapper>
+            {openModal.state && (
+                <ExperienceDetails openModal={openModal} setOpenModal={setOpenModal} />
+            )}
         </Container>
     )
 }
 
-export default index
+export default Experience
