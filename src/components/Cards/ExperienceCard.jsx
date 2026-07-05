@@ -7,18 +7,14 @@ const Document = styled.img`
     width: fit-content;
     background-color: #000;
     border-radius: 10px;
-    &:hover{
-        cursor: pointer;
-        opacity: 0.8;
-    }
 `
 
 const Description = styled.div`
     width: 100%;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 400;
     color: ${({ theme }) => theme.text_primary + 99};
-    margin-bottom: 10px;
+    margin-bottom: 4px;
     @media only screen and (max-width: 768px){
         font-size: 12px;
     }
@@ -34,9 +30,12 @@ text-overflow: ellipsis;
 `
 
 const Card = styled.div`
-    width: 650px;
+    width: 100%;
+    height: auto;
+    min-width: 0;
     border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: transparent;
     padding: 12px 16px;
     justify-content: space-between;
     position: relative;
@@ -44,35 +43,25 @@ const Card = styled.div`
     display: flex;
     flex-direction: column;
     gap: 12px;
-    transition: all 0.3s ease-in-out;
-    &:hover{
-        box-shadow: 0px 0px 20px rgba(0,0,0,0.2);
-        transform: translateY(-5px);
+    align-self: start;
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+    &:hover {
+        transform: translateY(-10px);
+        border-color: rgba(255, 255, 255, 0.25);
     }
     @media only screen and (max-width: 768px){
         padding: 10px;
         gap: 8px;
-        width: 300px;
+        width: 100%;
     }
-
-    &:hover ${Document}{
-        display: flex;
-    }
-
-    &:hover ${Span}{
-        overflow: visible;
-        -webkit-line-clamp: unset;
-
-    }
-
-    border: 0.1px solid #306EE8;
-    box-shadow: rgba(23, 92, 230, 0.15) 0px 4px 24px;
 `
 
 const Top = styled.div`
     width: 100%;
     display: flex;
-    gap: 12px
+    gap: 12px;
+    min-width: 0;
 `
 
 const Image = styled.img`
@@ -87,6 +76,7 @@ const Image = styled.img`
 
 const Body = styled.div`
     width: 100%;
+    min-width: 0;
     display: flex;
     flex-direction: column; 
 `
@@ -123,8 +113,9 @@ const Date = styled.div`
 const Skills = styled.div`
     width: 100%;
     display: flex;
-    gap: 12px;
-    margin-top: -10px;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 2px;
 `
 
 const ItemWrapper = styled.div`
@@ -134,19 +125,30 @@ const ItemWrapper = styled.div`
 `
 
 const Skill = styled.div`
-    font-size: 15px;
-    font-weight: 400;
-    color: ${({ theme }) => theme.text_primary + 99};
+    font-size: 12px;
+    font-weight: 500;
+    color: ${({ theme }) => theme.primary};
+    padding: 4px 8px;
+    border-radius: 999px;
+    background-color: ${({ theme }) => theme.primary + 15};
     @media only screen and (max-width: 768px){
         font-size: 12px;
     }
 `
 
+const ViewHint = styled.div`
+    margin-top: auto;
+    font-size: 12px;
+    font-weight: 600;
+    color: ${({ theme }) => theme.primary};
+`
 
 
-const ExperienceCard = ({ experience }) => {
+
+const ExperienceCard = ({ experience, onClick }) => {
+    const visibleSkills = experience?.skills?.slice(0, 4) || [];
     return (
-        <Card>
+        <Card onClick={() => onClick?.(experience)}>
             <Top>
                 <Image src={experience.img} />
                 <Body>
@@ -160,22 +162,23 @@ const ExperienceCard = ({ experience }) => {
                     <Span>{experience?.desc}</Span>
 
                 }
-                {experience?.skills &&
-                    <>
-                        <br />
-                        <Skills>
-                            <b>Skills:</b>
-                            <ItemWrapper>
-                                {experience?.skills?.map((skill, index) => (
-                                    <Skill>• {skill}</Skill>
-                                ))}
-                            </ItemWrapper>
-                        </Skills>
-                    </>
-                }
             </Description>
+            {experience?.skills &&
+                <Skills>
+                    <b>Skills:</b>
+                    <ItemWrapper>
+                        {visibleSkills?.map((skill, index) => (
+                            <Skill key={`${experience.id}-${skill}-${index}`}>{skill}</Skill>
+                        ))}
+                        {experience.skills.length > visibleSkills.length && (
+                            <Skill>+{experience.skills.length - visibleSkills.length} more</Skill>
+                        )}
+                    </ItemWrapper>
+                </Skills>
+            }
+            <ViewHint>Click to view responsibilities</ViewHint>
             {experience.doc &&
-                <a href={experience.doc} target="new">
+                <a href={experience.doc} target="new" onClick={(event) => event.stopPropagation()}>
                     <Document src={experience.doc} />
                 </a>
             }

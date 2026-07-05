@@ -4,14 +4,18 @@ import _default from '../../themes/default';
 
 export const Nav = styled.div`
     background-color: ${({theme}) => theme.card_light};
+    width: 100%;
     height: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1rem;
-    position: sticky;
+    position: fixed;
     top: 0;
-    z-index: 10;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
     @media (max-width: 960px) {
         trastion: 0.8s all ease;
     }
@@ -23,12 +27,13 @@ export const NavbarContainer = styled.div`
   height: 60px;
   z-index: 1;
   width: 100%;
-  padding: 0 24px;
-  max-width: 1200px;
+  padding: 0 clamp(16px, 4vw, 64px);
+  max-width: none;
 `;
 
 export const NavLogo = styled(LinkR)`
-    width: 80%;    
+    flex: 1 1 120px;
+    min-width: 0;
     padding: 0 6px;
     display: flex;
     justify-content: start;
@@ -38,10 +43,21 @@ export const NavLogo = styled(LinkR)`
       padding: 0 0px;
   }
 `;
-export const Span = styled.div`
-    padding: 0 4px;
-    font-weight: bold;
-    font-size: 18px;
+
+export const LogoVideo = styled.video`
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid ${({ theme }) => theme.primary};
+    box-shadow: rgba(133, 76, 230, 0.28) 0px 0px 22px;
+    background: ${({ theme }) => theme.card};
+    display: block;
+
+    @media (max-width: 640px) {
+      width: 55px;
+      height: 55px;
+    }
 `;
 export const NavItems = styled.ul`
     width: 100%;
@@ -97,7 +113,7 @@ export const GitHubButton = styled.a`
 `;
 
 export const ButtonContainer = styled.div`
-  width: 80%;  
+  flex: 1 1 180px;
   height: 100%;
   display: flex;
   justify-content: end;

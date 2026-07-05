@@ -9,6 +9,8 @@ justify-content: center;
 position: relative;
 z-index: 1;
 align-items: center;
+width: 100%;
+padding: 0 clamp(16px, 4vw, 64px);
 `
 
 const Wrapper = styled.div`
@@ -18,7 +20,7 @@ justify-content: space-between;
 align-items: center;
 flex-direction: column;
 width: 100%;
-max-width: 1100px;
+max-width: 1440px;
 gap: 12px;
 @media (max-width: 960px) {
     flex-direction: column;
@@ -49,28 +51,28 @@ export const Desc = styled.div`
 
 const SkillsContainer = styled.div`
   width: 100%;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
   margin-top: 30px;
   gap: 30px;
-  justify-content: center;
 `
 
 const Skill = styled.div`
   width: 100%;
-  max-width: 500px;
-  background: ${({ theme }) => theme.card};
-  border: 0.1px solid #854CE6;
-  box-shadow: rgba(23, 92, 230, 0.15) 0px 4px 24px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: transparent;
   border-radius: 16px;
   padding: 18px 36px;
+  transition: all 0.5s ease-in-out;
+  &:hover {
+    transform: translateY(-10px);
+    border-color: rgba(255, 255, 255, 0.25);
+  }
   @media (max-width: 768px) {
-    max-width: 400px;
     padding: 10px 36px;
   }
   @media (max-width: 500px) {
-    max-width: 330px;
-    padding: 10px 36px;
+    padding: 12px 16px;
   }
 
 
@@ -116,6 +118,7 @@ const SkillItem = styled.div`
 const SkillImage = styled.img`
   width: 24px;
   height: 24px;
+  object-fit: contain;
 `
 
 
@@ -128,11 +131,11 @@ const Skills = () => {
         </Desc>
         <SkillsContainer>
           {skills.map((skill) => (
-            <Skill>
+            <Skill key={skill.title}>
               <SkillTitle>{skill.title}</SkillTitle>
               <SkillList>
                 {skill.skills.map((item) => (
-                  <SkillItem>
+                  <SkillItem key={item.name}>
                     <SkillImage src={item.image}/>
                     {item.name}
                   </SkillItem>

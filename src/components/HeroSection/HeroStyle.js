@@ -1,21 +1,22 @@
 import styled from "styled-components";
-import _default from "../../themes/default";
 
 export const HeroContainer = styled.div`
-  background: ${({ theme }) => theme.card_light};
+  background: transparent;
   display: flex;
   justify-content: center;
   position: relative;
-  padding: 80px 30px;
+  width: 100%;
+  overflow: hidden;
+  padding: 80px clamp(16px, 4vw, 64px);
   @media (max-width: 960px) {
-    padding: 66px 16px;
+    padding: 66px 20px;
   }
-  @media (max-width: 640) {
+  @media (max-width: 640px) {
     padding: 32px 16px;
   }
   z-index: 1;
 
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 70% 95%, 0 100%);
+  clip-path: none;
 `;
 
 export const HeroBg = styled.div`
@@ -28,13 +29,15 @@ export const HeroBg = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  max-width: 1360px;
+  max-width: none;
   overflow: hidden;
   padding: 0 30px;
   top: 50%;
   left: 50%;
   -webkit-transform: translateX(-50%) translateY(-50%);
   transform: translateX(-50%) translateY(-50%);
+  z-index: 0;
+  pointer-events: none;
 
   @media (max-width: 960px) {
     justify-content: center;
@@ -48,7 +51,8 @@ export const HeroInnerContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 1100px;
+  max-width: 1440px;
+  z-index: 2;
 
   @media (max-width: 960px) {
     flex-direction: column;
@@ -95,9 +99,11 @@ export const HeroRightContainer = styled.div`
 export const Img = styled.img`
   position: relative;
   width: 100%;
-  height: 100%;
+  height: auto;
+  aspect-ratio: 1;
   max-width: 500px;
   max-height:500px;
+  object-fit: cover;
   
   border-radius: 50%;
 
