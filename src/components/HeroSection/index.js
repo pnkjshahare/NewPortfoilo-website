@@ -10,6 +10,7 @@ import {
   Span,
   SubTitle,
   ResumeButton,
+  StaticText,
 } from "./HeroStyle";
 import HeroImg from "../../images/Profile.jpg.jpg";
 import Typewriter from "typewriter-effect";
@@ -27,7 +28,7 @@ const HeroSection = () => {
               Hi, I am <br /> {Bio.name}
             </Title>
             <TextLoop>
-              I am Building
+              <StaticText>I am Building</StaticText>
               <Span $trend={trend}>
                 <Typewriter
                   options={{
