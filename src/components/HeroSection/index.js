@@ -28,7 +28,7 @@ const HeroSection = () => {
             </Title>
             <TextLoop>
               I am Building
-              <Span>
+              <Span $trend={trend}>
                 <Typewriter
                   options={{
                     strings: Bio.roles,
@@ -39,7 +39,7 @@ const HeroSection = () => {
               </Span>
             </TextLoop>
             <SubTitle>{Bio.description}</SubTitle>
-            <ResumeButton href={Bio.resume} target="display">
+            <ResumeButton href={Bio.resume} target="display" $trend={trend}>
               Check Resume
             </ResumeButton>
           </HeroLeftContainer>

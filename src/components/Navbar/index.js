@@ -14,7 +14,8 @@ import {
 } from "./NavbarStyledComponent";
 import { FaBars } from "react-icons/fa";
 import { FiSun, FiMoon } from "react-icons/fi";
-import BullClip from "../../images/BullClips.mp4";
+import BullBlue from "../../images/BullBlue.mp4";
+import BullRed from "../../images/BullRed.mp4";
 import { useThemeMode } from "../../utils/ThemeContext.js";
 import { useMarketTrend } from "../../utils/MarketContext.js";
 
@@ -22,11 +23,12 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = React.useState(false);
   const { mode, toggleMode } = useThemeMode();
   const { trend } = useMarketTrend();
+  const bullClip = trend === "down" ? BullRed : BullBlue;
   return (
     <Nav>
       <NavbarContainer>
         <NavLogo to="/" aria-label="Portfolio home">
-          <LogoVideo src={BullClip} autoPlay loop muted playsInline $trend={trend} />
+          <LogoVideo key={bullClip} src={bullClip} autoPlay loop muted playsInline $trend={trend} />
         </NavLogo>
         <NavItems>
           <NavLink href="#about">About</NavLink>

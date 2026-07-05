@@ -157,8 +157,9 @@ export const TextLoop = styled.div`
 `;
 
 export const Span = styled.span`
-  color: ${({ theme }) => theme.primary};
+  color: ${({ theme, $trend }) => ($trend === "down" ? theme.danger : theme.success)};
   cursor: pointer;
+  transition: color 0.4s ease;
 `;
 
 export const SubTitle = styled.div`
@@ -191,8 +192,8 @@ export const ResumeButton = styled.a`
     cursor: pointer;
     font-size: 18px;
     font-weight: 700;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    background: ${({ theme }) => theme.button};
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.4s ease;
+    background: ${({ theme, $trend }) => ($trend === "down" ? theme.danger : theme.success)};
     box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
     &:hover {
         transform: scale(1.03);
