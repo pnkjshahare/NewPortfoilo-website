@@ -18,7 +18,6 @@ export const Bio = {
   linkedin: "https://www.linkedin.com/in/pankaj-shahare-140a89239/",
   twitter: "https://x.com/PankajShahare18",
   insta: "https://www.instagram.com/pnkj_shahare/",
-  github: "https://github.com/pnkjshahare/",
 };
 
 export const skills = [
