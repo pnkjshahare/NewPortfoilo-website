@@ -21,6 +21,10 @@ const ChartWrap = styled.div`
   transform-origin: center;
   pointer-events: none;
   overflow: hidden;
+
+  @media (max-width: 768px) {
+    opacity: 0.18;
+  }
 `;
 
 const ChartMount = styled.div`
@@ -33,6 +37,10 @@ const DarkOverlay = styled.div`
   inset: 0;
   background: ${({ theme }) => theme.bg};
   opacity: 0.6;
+
+  @media (max-width: 768px) {
+    opacity: 0.4;
+  }
 `;
 
 const CANDLE_INTERVAL_SECONDS = 60;
