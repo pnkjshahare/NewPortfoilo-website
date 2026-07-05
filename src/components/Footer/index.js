@@ -2,7 +2,6 @@ import styled from "styled-components";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import InstagramIcon from "@mui/icons-material/Instagram";
 import { Bio } from "../../data/constants";
 
 const FooterContainer = styled.div`
@@ -105,9 +104,6 @@ function Footer() {
           </SocialMediaIcon>
           <SocialMediaIcon href={Bio.linkedin} target="display">
             <LinkedInIcon />
-          </SocialMediaIcon>
-          <SocialMediaIcon href={Bio.insta} target="display">
-            <InstagramIcon />
           </SocialMediaIcon>
         </SocialMediaIcons>
         <Copyright>&copy; 2026 Pankaj Shahare. All rights reserved.</Copyright>

@@ -37,7 +37,6 @@ export const Bio = {
     "https://drive.google.com/file/d/1m_xoHniWVS4BKMV31lidkDVidsilNMBX/view?usp=sharing",
   linkedin: "https://www.linkedin.com/in/pankaj-shahare/",
   twitter: "https://x.com/PankajShahare18",
-  insta: "https://www.instagram.com/pnkj_shahare/",
 };
 
 export const skills = [
@@ -52,7 +51,7 @@ export const skills = [
     ],
   },
   {
-    title: "Backend Development",
+    title: "Backend Technologies",
     skills: [
       { name: "Spring Boot", image: createBadgeImage("SB", "#6db33f") },
       { name: "Gin", image: createBadgeImage("GIN", "#00add8") },
@@ -61,7 +60,7 @@ export const skills = [
     ],
   },
   {
-    title: "Frontend Development",
+    title: "Frontend Technologies",
     skills: [
       { name: "React.js", image: "https://cdn.simpleicons.org/react" },
       { name: "HTML5", image: "https://cdn.simpleicons.org/html5" },
@@ -143,6 +142,7 @@ export const skills = [
       { name: "OOP's Concept", image: createBadgeImage("OOP", "#0f172a") },
       { name: "OS", image: createBadgeImage("OS", "#0f172a") },
       { name: "DBMS", image: createBadgeImage("DBMS", "#0f172a") },
+      { name: "CN", image: createBadgeImage("CN", "#0f172a") },
     ],
   },
 ];

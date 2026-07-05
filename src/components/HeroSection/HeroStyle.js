@@ -143,17 +143,23 @@ export const TextLoop = styled.div`
   font-weight: 600;
   font-size: 32px;
   display: flex;
+  flex-wrap: wrap;
   gap: 12px;
   color: ${({ theme }) => theme.text_primary};
   line-height: 68px;
   @media (max-width: 960px) {
     text-align: center;
+    justify-content: center;
   }
   @media (max-width: 640px) {
     font-size: 22px;
     line-height: 48px;
     margin-bottom: 16px;
   }
+`;
+
+export const StaticText = styled.span`
+  white-space: nowrap;
 `;
 
 export const Span = styled.span`
