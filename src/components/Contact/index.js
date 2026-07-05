@@ -60,7 +60,9 @@ const Shell = styled.div`
   max-width: 1440px;
   padding: 40px;
   border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid ${({ theme }) => theme.border};
+  background: ${({ theme }) => theme.card};
+  backdrop-filter: blur(10px);
 
   @media (max-width: 768px) {
     padding: 22px;
@@ -82,9 +84,9 @@ const Tagline = styled.div`
 const TagPill = styled.span`
   padding: 8px 12px;
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.03);
-  color: ${({ theme }) => theme.text_secondary};
+  border: 1px solid ${({ theme }) => theme.tag_border};
+  background: ${({ theme }) => theme.tag_bg};
+  color: ${({ theme }) => theme.tag_text};
 `;
 
 const SectionBlock = styled.div`
@@ -118,9 +120,10 @@ const ContactGrid = styled.div`
 const ContactCard = styled.a`
   min-height: 132px;
   padding: 18px;
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: transparent;
+  border-radius: 16px;
+  border: 1px solid ${({ theme }) => theme.border};
+  background: ${({ theme }) => theme.card};
+  backdrop-filter: blur(10px);
   color: ${({ theme }) => theme.text_primary};
   text-decoration: none;
   display: flex;
@@ -128,11 +131,13 @@ const ContactCard = styled.a`
   align-items: flex-start;
   transition:
     transform 0.25s ease,
-    border-color 0.25s ease;
+    border-color 0.25s ease,
+    background 0.25s ease;
 
   &:hover {
     transform: translateY(-5px);
-    border-color: rgba(255, 255, 255, 0.25);
+    border-color: ${({ theme }) => theme.primary};
+    background: ${({ theme }) => theme.card_hover};
   }
 `;
 
@@ -144,9 +149,8 @@ const ContactIcon = styled.span`
   place-items: center;
   flex: 0 0 auto;
   color: ${({ theme }) => theme.primary};
-  background: rgba(139, 92, 246, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  background: ${({ theme }) => theme.tag_bg};
+  border: 1px solid ${({ theme }) => theme.tag_border};
 
   svg {
     width: 22px;
@@ -184,8 +188,7 @@ const AvailabilityDot = styled.span`
   width: 10px;
   height: 10px;
   border-radius: 999px;
-  background: #00ff88;
-  box-shadow: 0 0 14px rgba(0, 255, 136, 0.8);
+  background: ${({ theme }) => theme.success};
   margin-top: 6px;
   flex: 0 0 auto;
 `;
@@ -207,20 +210,23 @@ const ProfileGrid = styled.div`
 const ProfileCard = styled.a`
   min-height: 220px;
   padding: 22px;
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: transparent;
+  border-radius: 16px;
+  border: 1px solid ${({ theme }) => theme.border};
+  background: ${({ theme }) => theme.card};
+  backdrop-filter: blur(10px);
   color: ${({ theme }) => theme.text_primary};
   text-decoration: none;
   display: grid;
   gap: 14px;
   transition:
     transform 0.3s ease,
-    border-color 0.3s ease;
+    border-color 0.3s ease,
+    background 0.3s ease;
 
   &:hover {
     transform: translateY(-5px);
-    border-color: rgba(255, 255, 255, 0.25);
+    border-color: ${({ theme }) => theme.primary};
+    background: ${({ theme }) => theme.card_hover};
   }
 `;
 
@@ -237,8 +243,8 @@ const ProfileIcon = styled.span`
   display: grid;
   place-items: center;
   color: ${({ theme }) => theme.primary};
-  background: rgba(56, 189, 248, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: ${({ theme }) => theme.tag_bg};
+  border: 1px solid ${({ theme }) => theme.tag_border};
 
   svg {
     width: 26px;
@@ -295,13 +301,9 @@ const ProfileButton = styled.span`
   gap: 8px;
   padding: 11px 14px;
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: linear-gradient(
-    90deg,
-    rgba(139, 92, 246, 0.18),
-    rgba(56, 189, 248, 0.18)
-  );
-  color: ${({ theme }) => theme.text_primary};
+  border: 1px solid ${({ theme }) => theme.tag_border};
+  background: ${({ theme }) => theme.tag_bg};
+  color: ${({ theme }) => theme.tag_text};
   font-size: 13px;
   font-weight: 700;
 `;
@@ -324,26 +326,18 @@ const CTAButton = styled.a`
   padding: 16px 18px;
   min-height: 56px;
   border-radius: 999px;
-  color: ${({ theme }) => theme.text_primary};
+  color: ${({ theme }) => theme.button_text};
   text-decoration: none;
   font-size: 14px;
   font-weight: 800;
   letter-spacing: 0.02em;
-  background:
-    linear-gradient(${({ theme }) => theme.card}, ${({ theme }) => theme.card})
-      padding-box,
-    linear-gradient(90deg, #8b5cf6, #38bdf8, #00ff88) border-box;
+  background: ${({ theme }) => theme.button};
   border: 1px solid transparent;
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
-  transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease,
-    filter 0.25s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 
   &:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 18px 34px rgba(0, 0, 0, 0.38);
-    filter: brightness(1.08);
+    transform: scale(1.03);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
   }
 `;
 

@@ -9,25 +9,25 @@ import {
   MobileIcon,
   MobileMenu,
   MobileLink,
+  ThemeToggleButton,
+  NavActions,
 } from "./NavbarStyledComponent";
 import { FaBars } from "react-icons/fa";
+import { FiSun, FiMoon } from "react-icons/fi";
 import BullClip from "../../images/BullClips.mp4";
+import { useThemeMode } from "../../utils/ThemeContext.js";
+import { useMarketTrend } from "../../utils/MarketContext.js";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = React.useState(false);
+  const { mode, toggleMode } = useThemeMode();
+  const { trend } = useMarketTrend();
   return (
     <Nav>
       <NavbarContainer>
         <NavLogo to="/" aria-label="Portfolio home">
-          <LogoVideo src={BullClip} autoPlay loop muted playsInline />
+          <LogoVideo src={BullClip} autoPlay loop muted playsInline $trend={trend} />
         </NavLogo>
-        <MobileIcon>
-          <FaBars
-            onClick={() => {
-              setIsOpen(!isOpen);
-            }}
-          />
-        </MobileIcon>
         <NavItems>
           <NavLink href="#about">About</NavLink>
           <NavLink href="#experience">Experience</NavLink>
@@ -36,6 +36,22 @@ const Navbar = () => {
           <NavLink href="#education">Education</NavLink>
           <NavLink href="#contact">Contact</NavLink>
         </NavItems>
+        <NavActions>
+          <ThemeToggleButton
+            onClick={toggleMode}
+            aria-label={mode === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+            title={mode === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+          >
+            {mode === "dark" ? <FiSun /> : <FiMoon />}
+          </ThemeToggleButton>
+          <MobileIcon>
+            <FaBars
+              onClick={() => {
+                setIsOpen(!isOpen);
+              }}
+            />
+          </MobileIcon>
+        </NavActions>
         {isOpen && (
           <MobileMenu isOpen={isOpen}>
             <MobileLink

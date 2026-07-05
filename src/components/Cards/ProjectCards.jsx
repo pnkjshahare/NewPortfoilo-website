@@ -18,19 +18,21 @@ const Card = styled.div`
   width: 100%;
   min-width: 0;
   height: 490px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: transparent;
+  border: 1px solid ${({ theme }) => theme.border};
+  background: ${({ theme }) => theme.card};
+  backdrop-filter: blur(10px);
   cursor: pointer;
-  border-radius: 10px;
+  border-radius: 18px;
   overflow: hidden;
   padding: 26px 20px;
   display: flex;
   flex-direction: column;
   gap: 14px;
-  transition: all 0.5s ease-in-out;
+  transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
   &:hover {
-    transform: translateY(-10px);
-    border-color: rgba(255, 255, 255, 0.25);
+    transform: translateY(-6px);
+    background: ${({ theme }) => theme.card_hover};
+    border-color: ${({ theme }) => theme.primary};
   }
   &:hover ${Button} {
     display: block;
@@ -57,9 +59,10 @@ const Tags = styled.div`
 
 const Tag = styled.span`
   font-size: 12px;
-  font-weight: 400;
-  color: ${({ theme }) => theme.primary};
-  background-color: ${({ theme }) => theme.primary + 15};
+  font-weight: 500;
+  color: ${({ theme }) => theme.tag_text};
+  background-color: ${({ theme }) => theme.tag_bg};
+  border: 1px solid ${({ theme }) => theme.tag_border};
   padding: 2px 8px;
   border-radius: 10px;
 `;

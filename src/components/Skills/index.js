@@ -59,14 +59,16 @@ const SkillsContainer = styled.div`
 
 const Skill = styled.div`
   width: 100%;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: transparent;
-  border-radius: 16px;
+  border: 1px solid ${({ theme }) => theme.border};
+  background: ${({ theme }) => theme.card};
+  backdrop-filter: blur(10px);
+  border-radius: 18px;
   padding: 18px 36px;
-  transition: all 0.5s ease-in-out;
+  transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
   &:hover {
-    transform: translateY(-10px);
-    border-color: rgba(255, 255, 255, 0.25);
+    transform: translateY(-6px);
+    border-color: ${({ theme }) => theme.primary};
+    background: ${({ theme }) => theme.card_hover};
   }
   @media (max-width: 768px) {
     padding: 10px 36px;
@@ -96,9 +98,10 @@ const SkillList = styled.div`
 
 const SkillItem = styled.div`
   font-size: 16px;
-  font-weight: 400;
-  color: ${({ theme }) => theme.text_primary + 80};
-  border: 1px solid ${({ theme }) => theme.text_primary + 80};
+  font-weight: 500;
+  color: ${({ theme }) => theme.tag_text};
+  background-color: ${({ theme }) => theme.tag_bg};
+  border: 1px solid ${({ theme }) => theme.tag_border};
   border-radius: 12px;
   padding: 12px 16px;
   display: flex;

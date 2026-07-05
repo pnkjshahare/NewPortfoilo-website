@@ -33,9 +33,10 @@ const Card = styled.div`
     width: 100%;
     height: auto;
     min-width: 0;
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    background: transparent;
+    border-radius: 18px;
+    border: 1px solid ${({ theme }) => theme.border};
+    background: ${({ theme }) => theme.card};
+    backdrop-filter: blur(10px);
     padding: 12px 16px;
     justify-content: space-between;
     position: relative;
@@ -45,10 +46,11 @@ const Card = styled.div`
     gap: 12px;
     align-self: start;
     cursor: pointer;
-    transition: all 0.5s ease-in-out;
+    transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
     &:hover {
-        transform: translateY(-10px);
-        border-color: rgba(255, 255, 255, 0.25);
+        transform: translateY(-6px);
+        border-color: ${({ theme }) => theme.primary};
+        background: ${({ theme }) => theme.card_hover};
     }
     @media only screen and (max-width: 768px){
         padding: 10px;
@@ -127,10 +129,11 @@ const ItemWrapper = styled.div`
 const Skill = styled.div`
     font-size: 12px;
     font-weight: 500;
-    color: ${({ theme }) => theme.primary};
+    color: ${({ theme }) => theme.tag_text};
     padding: 4px 8px;
     border-radius: 999px;
-    background-color: ${({ theme }) => theme.primary + 15};
+    background-color: ${({ theme }) => theme.tag_bg};
+    border: 1px solid ${({ theme }) => theme.tag_border};
     @media only screen and (max-width: 768px){
         font-size: 12px;
     }

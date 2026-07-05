@@ -18,8 +18,9 @@ const Card = styled.div`
   max-width: 1200px;
   padding: 28px;
   border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: transparent;
+  border: 1px solid ${({ theme }) => theme.border};
+  background: ${({ theme }) => theme.card};
+  backdrop-filter: blur(10px);
 `;
 
 const Header = styled.div`
@@ -60,16 +61,18 @@ const ProfileTile = styled.a`
   min-height: 82px;
   padding: 16px;
   border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: transparent;
+  border: 1px solid ${({ theme }) => theme.border};
+  background: ${({ theme }) => theme.card};
   color: ${({ theme }) => theme.text_primary};
   transition:
     transform 0.2s ease,
-    border-color 0.2s ease;
+    border-color 0.2s ease,
+    background 0.2s ease;
 
   &:hover {
     transform: translateY(-4px);
-    border-color: rgba(255, 255, 255, 0.25);
+    border-color: ${({ theme }) => theme.primary};
+    background: ${({ theme }) => theme.card_hover};
   }
 `;
 
@@ -80,7 +83,7 @@ const IconWrap = styled.span`
   width: 42px;
   height: 42px;
   border-radius: 14px;
-  background: rgba(133, 76, 230, 0.14);
+  background: ${({ theme }) => theme.tag_bg};
   color: ${({ theme }) => theme.primary};
   font-size: 20px;
 `;

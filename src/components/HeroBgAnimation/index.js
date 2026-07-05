@@ -8,14 +8,15 @@ import {
   LineStyle,
   createChart,
 } from "lightweight-charts";
+import { useMarketTrend } from "../../utils/MarketContext.js";
 
 const ChartWrap = styled.div`
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  opacity: 0.3;
-  filter: blur(2px);
+  opacity: 0.08;
+  filter: blur(1px);
   transform: scale(1.04);
   transform-origin: center;
   pointer-events: none;
@@ -30,12 +31,8 @@ const ChartMount = styled.div`
 const DarkOverlay = styled.div`
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(5, 10, 20, 0.58) 0%,
-    rgba(5, 10, 20, 0.46) 40%,
-    rgba(5, 10, 20, 0.72) 100%
-  );
+  background: ${({ theme }) => theme.bg};
+  opacity: 0.6;
 `;
 
 const CANDLE_INTERVAL_SECONDS = 60;
@@ -110,6 +107,7 @@ const buildNextBar = (previousBar) => {
 
 const HeroBgAnimation = () => {
   const chartRef = useRef(null);
+  const { setTrend } = useMarketTrend();
 
   useEffect(() => {
     const mount = chartRef.current;
@@ -188,11 +186,11 @@ const HeroBgAnimation = () => {
     });
 
     const candlestickSeries = chart.addSeries(CandlestickSeries, {
-      upColor: "#00d084",
-      downColor: "#ff4d4f",
+      upColor: "#00C176",
+      downColor: "#FF5A5F",
       borderVisible: false,
-      wickUpColor: "#00d084",
-      wickDownColor: "#ff4d4f",
+      wickUpColor: "#00C176",
+      wickDownColor: "#FF5A5F",
       priceLineVisible: false,
       lastValueVisible: false,
       crosshairMarkerVisible: false,
@@ -221,6 +219,7 @@ const HeroBgAnimation = () => {
     volumeSeries.setData(initialState.volumes);
     chart.timeScale().fitContent();
     chart.timeScale().scrollToRealTime();
+    setTrend(latestBar.close >= latestBar.open ? "up" : "down");
 
     let animationFrameId = null;
     let timeoutId = null;
@@ -234,6 +233,7 @@ const HeroBgAnimation = () => {
           }
 
           const nextTick = buildNextBar(latestBar);
+          setTrend(nextTick.bar.close >= nextTick.bar.open ? "up" : "down");
           const startTime = performance.now();
           const duration = 525;
 
@@ -288,7 +288,7 @@ const HeroBgAnimation = () => {
       }
       chart.remove();
     };
-  }, []);
+  }, [setTrend]);
 
   return (
     <ChartWrap>

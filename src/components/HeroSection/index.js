@@ -14,8 +14,10 @@ import {
 import HeroImg from "../../images/Profile.jpg.jpg";
 import Typewriter from "typewriter-effect";
 import { Bio } from "../../data/constants";
+import { useMarketTrend } from "../../utils/MarketContext.js";
 
 const HeroSection = () => {
+  const { trend } = useMarketTrend();
   return (
     <div id="about">
       <HeroContainer>
@@ -43,7 +45,7 @@ const HeroSection = () => {
           </HeroLeftContainer>
 
           <HeroRightContainer id="Right">
-            <Img src={HeroImg} alt="pnkj img" />
+            <Img src={HeroImg} alt="pnkj img" $trend={trend} />
           </HeroRightContainer>
         </HeroInnerContainer>
       </HeroContainer>

@@ -107,7 +107,8 @@ export const Img = styled.img`
   
   border-radius: 50%;
 
-  border: 2px solid ${({ theme }) => theme.primary};
+  border: 4px solid ${({ theme, $trend }) => ($trend === "down" ? theme.danger : theme.success)};
+  transition: border-color 0.4s ease;
 
   @media (max-width: 768px) {
     max-width: 400px;
@@ -185,29 +186,22 @@ export const ResumeButton = styled.a`
     max-width: 300px;
     text-align: center;
     padding: 16px 0;
-    color:${({ theme }) => theme.white};
-    border-radius: 20px;
+    color: ${({ theme }) => theme.button_text};
+    border-radius: 999px;
     cursor: pointer;
-    font-size: 20px;
-    font-weight: 600;
-    transition: all 0.2s ease-in-out !important;
-    background: hsla(271, 100%, 50%, 1);
-    background: linear-gradient(225deg, hsla(271, 100%, 50%, 1) 0%, hsla(294, 100%, 50%, 1) 100%);
-    background: -moz-linear-gradient(225deg, hsla(271, 100%, 50%, 1) 0%, hsla(294, 100%, 50%, 1) 100%);
-    background: -webkit-linear-gradient(225deg, hsla(271, 100%, 50%, 1) 0%, hsla(294, 100%, 50%, 1) 100%);
-    box-shadow:  20px 20px 60px #1F2634,
-    -20px -20px 60px #1F2634;
+    font-size: 18px;
+    font-weight: 700;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    background: ${({ theme }) => theme.button};
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
     &:hover {
-        transform: scale(1.05);
-    transition: all 0.4s ease-in-out;
-    box-shadow:  20px 20px 60px #1F2634,
-    filter: brightness(1);
-    }    
-    
-    
+        transform: scale(1.03);
+        box-shadow: 0 16px 34px rgba(0, 0, 0, 0.24);
+    }
+
     @media (max-width: 640px) {
         padding: 12px 0;
-        font-size: 18px;
-    } 
+        font-size: 16px;
+    }
 
 `;

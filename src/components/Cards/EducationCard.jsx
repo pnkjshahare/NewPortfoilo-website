@@ -37,9 +37,10 @@ const Card = styled.div`
     width: 100%;
     height: 260px;
     min-width: 0;
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    background: transparent;
+    border-radius: 18px;
+    border: 1px solid ${({ theme }) => theme.border};
+    background: ${({ theme }) => theme.card};
+    backdrop-filter: blur(10px);
     padding: 12px 16px;
     justify-content: space-between;
     position: relative;
@@ -48,11 +49,12 @@ const Card = styled.div`
     flex-direction: column;
     gap: 12px;
     align-self: start;
-    transition: all 0.3s ease-in-out;
+    transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
     &:hover{
         height: auto;
         min-height: 260px;
-        border-color: rgba(255, 255, 255, 0.25);
+        border-color: ${({ theme }) => theme.primary};
+        background: ${({ theme }) => theme.card_hover};
         transform: translateY(-5px);
     }
     @media only screen and (max-width: 768px){
