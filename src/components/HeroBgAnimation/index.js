@@ -15,7 +15,7 @@ const ChartWrap = styled.div`
   inset: 0;
   width: 100%;
   height: 100%;
-  opacity: 0.08;
+  opacity: 0.16;
   filter: blur(1px);
   transform: scale(1.04);
   transform-origin: center;
@@ -23,7 +23,7 @@ const ChartWrap = styled.div`
   overflow: hidden;
 
   @media (max-width: 768px) {
-    opacity: 0.18;
+    opacity: 0.3;
   }
 `;
 
@@ -36,10 +36,10 @@ const DarkOverlay = styled.div`
   position: absolute;
   inset: 0;
   background: ${({ theme }) => theme.bg};
-  opacity: 0.6;
+  opacity: 0.4;
 
   @media (max-width: 768px) {
-    opacity: 0.4;
+    opacity: 0.25;
   }
 `;
 
