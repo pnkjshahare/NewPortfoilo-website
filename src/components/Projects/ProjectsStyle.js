@@ -92,7 +92,7 @@ export const Divider = styled.div`
 export const CardContainer = styled.div`
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
     align-items: center;
     gap: 28px;
     justify-items: stretch;
