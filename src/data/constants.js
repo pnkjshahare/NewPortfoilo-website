@@ -4,6 +4,7 @@ import holteImg from "../images/holtec-asia.png";
 import bluestockImg from "../images/bluestock.jpeg";
 import connecticusImg from "../images/ConnecticusTech.jpg";
 import FyersImg from "../images/Fyers.jpg";
+import fixProtocolImg from "../images/FIX_ENGINE_PROTOCOL.png";
 
 const createBadgeImage = (
   label,
@@ -287,6 +288,17 @@ export const education = [
 ];
 
 export const projects = [
+  {
+    id: 10,
+    title: "FIX Protocol Engine (FIX 4.4)",
+    description:
+      "A high-performance FIX 4.4 Protocol Engine built in C++ implementing FIX message encoding, parsing, validation, session management, and TCP-based client/server communication. Supports the complete order lifecycle including Logon, New Order Single, and Execution Report with BodyLength and CheckSum validation.",
+    image: fixProtocolImg,
+    tags: ["C++", "FIX 4.4", "TCP/IP", "WinSock", "CMake", "Networking"],
+    category: "trading",
+    github: "https://github.com/pnkjshahare/FIX-Protocol-Engine",
+    webapp: "",
+  },
   {
     id: 9,
     title: "LiveCodeHub-Collaborative Code Editor",
